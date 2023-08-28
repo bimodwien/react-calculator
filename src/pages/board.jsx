@@ -54,7 +54,7 @@ const Board = () => {
         <button>=</button>
         <br />
         <button onClick={()=> {angka('0')}}>0</button>
-        <button>.</button>
+        <button onClick={() => {angka('.')}}>.</button>
       </div>
     </>
   )
