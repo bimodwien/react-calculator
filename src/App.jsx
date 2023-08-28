@@ -1,7 +1,9 @@
+import Board from "./pages/board";
+
 function App() {
   return (
     <div className="App">
-      <p>Hello World</p>
+      <Board />
     </div>
   );
 }
