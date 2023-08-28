@@ -7,7 +7,24 @@ const Board = () => {
   const [result, setResult] = useState(0);
 
   function angka(params) {
-   setCounter(counter + params)
+   setCounter(counter + params);
+  }
+
+  function handleTambah() {
+    setResult(Number(counter) + result);
+    counter = '';
+  }
+
+  function handleKurang() {
+    setResult(Number(counter) - result)
+  }
+
+  function handleKali() {
+    setResult(Number(counter) * result)
+  }
+
+  function handleBagi() {
+    setResult(Number(counter) / result)
   }
 
 
@@ -17,19 +34,19 @@ const Board = () => {
         <div>Board</div>
         <div className='board-result'>Ini buat Hasil : {counter}</div>
         <button>C</button>
-        <button>:</button>
-        <button>x</button>
+        <button onClick={handleBagi}>:</button>
+        <button onClick={handleKali}>x</button>
         <button>Backspace</button>
         <br />
         <button onClick={()=> {angka('7')}}>7</button>
         <button onClick={()=> {angka('8')}}>8</button>
         <button onClick={()=> {angka('9')}}>9</button>
-        <button>-</button>
+        <button onClick={handleKurang}>-</button>
         <br />
         <button onClick={()=> {angka('4')}}>4</button>
         <button onClick={()=> {angka('5')}}>5</button>
         <button onClick={()=> {angka('6')}}>6</button>
-        <button>+</button>
+        <button onClick={handleTambah}>+</button>
         <br />
         <button onClick={()=> {angka('1')}}>1</button>
         <button onClick={()=> {angka('2')}}>2</button>
