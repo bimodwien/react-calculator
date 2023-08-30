@@ -18,9 +18,27 @@ const Board = () => {
     }
     if (action === 'c') {
       storage.current = null;
-      setCounter('')
-      setResult(0)
+      setCounter('');
+      setResult(0);
     }
+    if (storage.current !== null) {
+      calculate();
+    }
+    else {
+      setResult(counter);
+    }
+    setCounter('');
+    storage.current = action;
+
+    if (action === '=') {
+      storage.current = null;
+      setCounter('');
+    }
+
+  }
+
+  function calculate() {
+    
   }
 
 
