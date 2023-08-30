@@ -16,10 +16,9 @@ const Board = () => {
       eraseNumber.pop();
       setCounter(eraseNumber.join(''));
     }
+    // untuk ngereset semua perhitungan, state awal jadi null
     if (action === 'c') {
-      storage.current = null;
       setCounter('');
-      setResult(0);
     }
     if (storage.current !== null) {
       calculate();
@@ -38,7 +37,18 @@ const Board = () => {
   }
 
   function calculate() {
-    
+    if (storage.current === '+') {
+      setResult(Number(result) + Number(counter));
+    }
+    if (storage.current === '-') {
+      setResult(result - counter);
+    }
+    if (storage.current === 'x') {
+      setResult(result * counter);
+    }
+    if (storage.current === ':') {
+      setResult(result / counter);
+    }
   }
 
 
