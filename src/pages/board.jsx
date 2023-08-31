@@ -2,53 +2,72 @@ import React, { useRef, useState } from "react";
 import "./style.css";
 
 const Board = () => {
-  const [counter, setCounter] = useState("");
+  const [inputNumber, setinputNumber] = useState("");
   const [result, setResult] = useState(0);
-  const storage = useRef(null);
+  const actionToCalculate = useRef(null);
 
-  function angka(params) {
-    setCounter(counter + params);
+  const [listHistory, setListHistory] = useState([]);
+  // const [liveHistory, setLiveHistory] = useState('');
+
+  function angka(angka) {
+    setinputNumber(inputNumber + angka);
   }
 
   function handleAction(action) {
-    if (action === 'b') {
-      const eraseNumber = counter.split('');
-      eraseNumber.pop();
-      setCounter(eraseNumber.join(''));
-    }
-    // untuk ngereset semua perhitungan, state awal jadi null
     if (action === 'c') {
-      setCounter('');
+      actionToCalculate.current = null;
+      setinputNumber('');
+      setResult(0);
+      return;
     }
-    if (storage.current !== null) {
+    if (action === 'b') {
+      const eraseNumber = inputNumber.split('');
+      eraseNumber.pop();
+      setinputNumber(eraseNumber.join(''));
+      return;
+    }
+    if (actionToCalculate.current === null && inputNumber === '') {
+      setinputNumber('0');
+    }
+    if (actionToCalculate.current !== null){
       calculate();
     }
     else {
-      setResult(counter);
-    }
-    setCounter('');
-    storage.current = action;
-
+      setResult(inputNumber);
+    }    
+    actionToCalculate.current = action;
     if (action === '=') {
-      storage.current = null;
-      setCounter('');
+      actionToCalculate.current = null;
+      setinputNumber('');
     }
-
+    setinputNumber('');
   }
 
   function calculate() {
-    if (storage.current === '+') {
-      setResult(Number(result) + Number(counter));
+    let calculateResult = 0;
+    if (actionToCalculate.current === '+') {
+      calculateResult = Number(result) + Number(inputNumber)
     }
-    if (storage.current === '-') {
-      setResult(result - counter);
+    if (actionToCalculate.current === '-') {
+      calculateResult = result - inputNumber;
     }
-    if (storage.current === 'x') {
-      setResult(result * counter);
+    if (actionToCalculate.current === 'x') {
+      calculateResult = result * inputNumber;
     }
-    if (storage.current === ':') {
-      setResult(result / counter);
+    if (actionToCalculate.current === ':') {
+      calculateResult = result / inputNumber;
     }
+    setResult(calculateResult);
+    setListHistory([...listHistory, {
+      inputPertama: result,
+      inputKalkulasi: actionToCalculate.current,
+      inputKedua: inputNumber,
+      hasil: calculateResult
+    }])
+  }
+
+  function handleClickHistory(currentHistory) {
+    setinputNumber(currentHistory.hasil);    
   }
 
 
@@ -56,7 +75,7 @@ const Board = () => {
     <>
       <div className="board-calculating">
         <div>Board</div>
-        <div className="board-result">Ini buat Hasil : {!counter ? result : counter}</div>
+        <div className="board-result">Ini buat Hasil : {!inputNumber ? result : inputNumber}</div>
         <div>
           <button onClick={() => handleAction('c')}>C</button>
           <button onClick={() => handleAction(':')}>:</button>
@@ -85,6 +104,14 @@ const Board = () => {
           <button onClick={() => {angka("0");}}>0</button>
           <button onClick={() => {angka(".");}}>.</button>
         </div>
+      </div>
+      <div className="history-board">
+        {listHistory.map((history, indexHistory) => {
+          return <div key={indexHistory} onClick={() => handleClickHistory(history)}>
+            <div>{history.inputPertama}{history.inputKalkulasi}{history.inputKedua}</div>
+            <div>{history.hasil}</div>
+          </div>          
+        })}
       </div>
     </>
   );
