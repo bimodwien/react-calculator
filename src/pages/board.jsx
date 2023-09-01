@@ -7,7 +7,7 @@ const Board = () => {
   const actionToCalculate = useRef(null);
 
   const [listHistory, setListHistory] = useState([]);
-  // const [liveHistory, setLiveHistory] = useState('');
+  const [liveHistory, setLiveHistory] = useState('');
 
   function angka(angka) {
     setinputNumber(inputNumber + angka);
@@ -26,15 +26,22 @@ const Board = () => {
     actionToCalculate.current = action;
     if (action === '=') {
       actionToCalculate.current = null;
+      setLiveHistory(liveTest);
       setinputNumber('');
     }
     setinputNumber('');
+  }
+
+  // ini supaya liveHistory bisa mendapatkan update terbaru dari liveHistory yang ada di react
+  function liveTest(params) {
+    return `${params} =`;
   }
 
   function calculate() {
     let calculateResult = 0;
     if (actionToCalculate.current === '+') {
       calculateResult = Number(result) + Number(inputNumber)
+      setLiveHistory(`${result} + ${inputNumber}`)
     }
     if (actionToCalculate.current === '-') {
       calculateResult = result - inputNumber;
@@ -58,6 +65,7 @@ const Board = () => {
     actionToCalculate.current = null;
     setinputNumber('');
     setResult(0);
+    setLiveHistory('');
   }
 
   function handleDelete() {
@@ -70,14 +78,23 @@ const Board = () => {
     setinputNumber(currentHistory.hasil);    
   }
 
+  function handlePlusMinus() {
+    setinputNumber((-1*inputNumber).toString())
+  }
+
 
   return (
     <>
     <div className="full-content">
       <div className="main-board">
-        <div>Calculator</div>
+        <div className="title-board">Calculator</div>
         <div className="result-board">
-        {!inputNumber ? result : inputNumber}
+          <div>
+            {liveHistory}
+          </div>
+          <div>
+            {!inputNumber ? result : inputNumber}
+          </div>
         </div>
         <div className="calculating-board">
           <div className="calculating-button-field">
@@ -102,15 +119,17 @@ const Board = () => {
             <button className="angka-button" onClick={() => {angka("1");}}>1</button>
             <button className="angka-button" onClick={() => {angka("2");}}>2</button>
             <button className="angka-button" onClick={() => {angka("3");}}>3</button>
-            <div className="last-field">
-              <button className="angka-button" onClick={() => {angka(".");}}>.</button>
-              <button className="angka-button" onClick={() => {angka("0");}}>0</button>
-            </div>
             <button className="equal-button" onClick={() => handleAction('=')}>=</button>
           </div>       
+          <div className="calculating-button-field">
+            <button className="angka-button" onClick={handlePlusMinus}>+/-</button>
+            <button className="angka-button" onClick={() => {angka("0");}}>0</button>
+            <button className="angka-button" onClick={() => {angka(".");}}>.</button>
+          </div>
         </div>
       </div>
       <div className="history-board">
+        <div>History</div>
         {listHistory.map((history, indexHistory) => {
           return <div key={indexHistory} onClick={() => handleClickHistory(history)}>
             <div>{history.inputPertama}{history.inputKalkulasi}{history.inputKedua}</div>

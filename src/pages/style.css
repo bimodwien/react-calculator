@@ -1,20 +1,30 @@
-
 .full-content {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
-    height: 100vh;
-    
+    padding: 5%;
+
 }
+
+.title-board {
+    color: #CAAA00;
+    background-color: #000000;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: underline;
+    padding: 5px 8px;
+}
+
 .main-board {
     width: 50%;
+    height: 100%;
 }
 
 .result-board {
     border: 0.5px solid black;
     height: 150px;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     align-items: flex-end;
     color: white;
     background-color: #000000;
@@ -22,12 +32,14 @@
 }
 
 .history-board {
-    background-color: bisque;
+    background-color: #000000;
+    color: white;
     width: 30%;
 }
 
 .calculating-button-field {
     display: flex;
+    flex-direction: row;
 }
 
 .action-button {
@@ -36,14 +48,18 @@
     background-color: #202024;
     color: #A88F08;
     border: 1px solid #000000;
+    flex-grow: 1;
+    flex-basis: 0;
 }
 
 .angka-button {
     height: 60px;
-    width: 120px;
+    width: 60px;
     border: 1px solid #000000;
     background-color: #2E2E2E;
     color: whitesmoke;
+    flex-grow: 1;
+    flex-basis: 0;
 }
 
 .equal-button {
@@ -51,4 +67,6 @@
     width: 120px;
     border: 1px solid #000000;
     background-color: #CAAA00;
+    flex-grow: 1;
+    flex-basis: 0;
 }
