@@ -14,18 +14,6 @@ const Board = () => {
   }
 
   function handleAction(action) {
-    if (action === 'c') {
-      actionToCalculate.current = null;
-      setinputNumber('');
-      setResult(0);
-      return;
-    }
-    if (action === 'b') {
-      const eraseNumber = inputNumber.split('');
-      eraseNumber.pop();
-      setinputNumber(eraseNumber.join(''));
-      return;
-    }
     if (actionToCalculate.current === null && inputNumber === '') {
       setinputNumber('0');
     }
@@ -66,6 +54,18 @@ const Board = () => {
     }])
   }
 
+  function handleClear() {
+    actionToCalculate.current = null;
+    setinputNumber('');
+    setResult(0);
+  }
+
+  function handleDelete() {
+    const eraseNumber = inputNumber.split('');
+    eraseNumber.pop();
+    setinputNumber(eraseNumber.join(''));
+  }
+
   function handleClickHistory(currentHistory) {
     setinputNumber(currentHistory.hasil);    
   }
@@ -73,36 +73,41 @@ const Board = () => {
 
   return (
     <>
-      <div className="board-calculating">
-        <div>Board</div>
-        <div className="board-result">Ini buat Hasil : {!inputNumber ? result : inputNumber}</div>
-        <div>
-          <button onClick={() => handleAction('c')}>C</button>
-          <button onClick={() => handleAction(':')}>:</button>
-          <button onClick={() => handleAction('x')}>x</button>
-          <button onClick={() => handleAction('b')}>Backspace</button>
+    <div className="full-content">
+      <div className="main-board">
+        <div>Calculator</div>
+        <div className="result-board">
+        {!inputNumber ? result : inputNumber}
         </div>
-        <div>
-          <button onClick={() => {angka("7")}}>7</button>
-          <button onClick={() => {angka("8")}}>8</button>
-          <button onClick={() => {angka("9")}}>9</button>
-          <button onClick={()=> handleAction('-')}>-</button>
-        </div>
-        <div>
-          <button onClick={() => {angka("4")}}>4</button>
-          <button onClick={() => {angka("5")}}>5</button>
-          <button onClick={() => {angka("6")}}>6</button>
-          <button onClick={() => handleAction('+')}>+</button>
-        </div>
-        <div>
-          <button onClick={() => {angka("1");}}>1</button>
-          <button onClick={() => {angka("2");}}>2</button>
-          <button onClick={() => {angka("3");}}>3</button>
-          <button onClick={() => handleAction('=')}>=</button>
-        </div>
-        <div>
-          <button onClick={() => {angka("0");}}>0</button>
-          <button onClick={() => {angka(".");}}>.</button>
+        <div className="calculating-board">
+          <div className="calculating-button-field">
+            <button className="action-button" onClick={handleClear}>C</button>
+            <button className="action-button" onClick={() => handleAction(':')}>:</button>
+            <button className="action-button" onClick={() => handleAction('x')}>x</button>
+            <button className="action-button" onClick={handleDelete}>Backspace</button>
+          </div>
+          <div className="calculating-button-field">
+            <button className="angka-button" onClick={() => {angka("7")}}>7</button>
+            <button className="angka-button" onClick={() => {angka("8")}}>8</button>
+            <button className="angka-button" onClick={() => {angka("9")}}>9</button>
+            <button className="action-button" onClick={()=> handleAction('-')}>-</button>
+          </div>
+          <div className="calculating-button-field">
+            <button className="angka-button" onClick={() => {angka("4")}}>4</button>
+            <button className="angka-button" onClick={() => {angka("5")}}>5</button>
+            <button className="angka-button" onClick={() => {angka("6")}}>6</button>
+            <button className="action-button" onClick={() => handleAction('+')}>+</button>
+          </div>
+          <div className="calculating-button-field">
+            <button className="angka-button" onClick={() => {angka("1");}}>1</button>
+            <button className="angka-button" onClick={() => {angka("2");}}>2</button>
+            <button className="angka-button" onClick={() => {angka("3");}}>3</button>
+            <div className="last-field">
+              <button className="angka-button" onClick={() => {angka(".");}}>.</button>
+              <button className="angka-button" onClick={() => {angka("0");}}>0</button>
+            </div>
+            <button className="equal-button" onClick={() => handleAction('=')}>=</button>
+          </div>       
         </div>
       </div>
       <div className="history-board">
@@ -113,6 +118,7 @@ const Board = () => {
           </div>          
         })}
       </div>
+    </div>
     </>
   );
 };
