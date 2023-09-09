@@ -37,36 +37,36 @@
     width: 30%;
 }
 
-.calculating-button-field {
-    display: flex;
-    flex-direction: row;
+.calculating-board {
+    display: grid;
+    grid-template-areas:
+    '. . . .'
+    '. . . .'
+    '. . . .'
+    '. . . myArea'
+    '. . . myArea'
+    ;
+    grid-gap: 1px;
+    background-color: #000000;
 }
 
 .action-button {
-    height: 60px;
-    width: 120px;
     background-color: #202024;
     color: #A88F08;
-    border: 1px solid #000000;
-    flex-grow: 1;
-    flex-basis: 0;
+    padding: 20px 0;
+    text-align: center;
 }
 
 .angka-button {
-    height: 60px;
-    width: 60px;
-    border: 1px solid #000000;
     background-color: #2E2E2E;
     color: whitesmoke;
-    flex-grow: 1;
-    flex-basis: 0;
+    padding: 20px 0;
+    text-align: center;
 }
 
 .equal-button {
-    height: 120px;
-    width: 120px;
-    border: 1px solid #000000;
     background-color: #CAAA00;
-    flex-grow: 1;
-    flex-basis: 0;
+    grid-area: myArea;
+    padding: 40px 0;
+    text-align: center;
 }

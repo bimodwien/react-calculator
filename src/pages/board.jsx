@@ -97,35 +97,25 @@ const Board = () => {
           </div>
         </div>
         <div className="calculating-board">
-          <div className="calculating-button-field">
-            <button className="action-button" onClick={handleClear}>C</button>
-            <button className="action-button" onClick={() => handleAction(':')}>:</button>
-            <button className="action-button" onClick={() => handleAction('x')}>x</button>
-            <button className="action-button" onClick={handleDelete}>Backspace</button>
-          </div>
-          <div className="calculating-button-field">
-            <button className="angka-button" onClick={() => {angka("7")}}>7</button>
-            <button className="angka-button" onClick={() => {angka("8")}}>8</button>
-            <button className="angka-button" onClick={() => {angka("9")}}>9</button>
-            <button className="action-button" onClick={()=> handleAction('-')}>-</button>
-          </div>
-          <div className="calculating-button-field">
-            <button className="angka-button" onClick={() => {angka("4")}}>4</button>
-            <button className="angka-button" onClick={() => {angka("5")}}>5</button>
-            <button className="angka-button" onClick={() => {angka("6")}}>6</button>
-            <button className="action-button" onClick={() => handleAction('+')}>+</button>
-          </div>
-          <div className="calculating-button-field">
-            <button className="angka-button" onClick={() => {angka("1");}}>1</button>
-            <button className="angka-button" onClick={() => {angka("2");}}>2</button>
-            <button className="angka-button" onClick={() => {angka("3");}}>3</button>
-            <button className="equal-button" onClick={() => handleAction('=')}>=</button>
-          </div>       
-          <div className="calculating-button-field">
-            <button className="angka-button" onClick={handlePlusMinus}>+/-</button>
-            <button className="angka-button" onClick={() => {angka("0");}}>0</button>
-            <button className="angka-button" onClick={() => {angka(".");}}>.</button>
-          </div>
+          <div className="action-button" onClick={handleClear}>C</div>
+          <div className="action-button" onClick={() => {handleAction(':')}}>:</div>
+          <div className="action-button" onClick={() => {handleAction('x')}}>*</div>
+          <div className="action-button" onClick={handleDelete}>Backspace</div>
+          <div className="angka-button" onClick={() => {angka('7')}}>7</div>
+          <div className="angka-button" onClick={() => {angka('8')}}>8</div>
+          <div className="angka-button" onClick={() => {angka('9')}}>9</div>
+          <div className="action-button" onClick={()=> {handleAction('-')}}>-</div>
+          <div className="angka-button" onClick={() => {angka('4')}}>4</div>
+          <div className="angka-button" onClick={() => {angka('5')}}>5</div>
+          <div className="angka-button" onClick={() => {angka('6')}}>6</div>
+          <div className="action-button" onClick={() => {handleAction('+')}}>+</div>
+          <div className="angka-button" onClick={() => {angka('1')}}>1</div>
+          <div className="angka-button" onClick={() => {angka('2')}}>2</div>
+          <div className="angka-button" onClick={() => {angka('3')}}>3</div>
+          <div className="equal-button" onClick={() => {handleAction('=')}}>=</div>
+          <div className="angka-button" onClick={handlePlusMinus}>+/-</div>
+          <div className="angka-button" onClick={() => {angka('0')}}>0</div>
+          <div className="angka-button" onClick={() => {angka('.')}}>.</div>
         </div>
       </div>
       <div className="history-board">
