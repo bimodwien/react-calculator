@@ -3,7 +3,8 @@
     align-items: stretch;
     justify-content: center;
     padding: 5%;
-
+    border-radius: 20px;
+    margin-top: 50px;
 }
 
 .title-board {
