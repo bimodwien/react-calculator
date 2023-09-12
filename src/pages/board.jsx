@@ -1,5 +1,8 @@
 import React, { useRef, useState } from "react";
 import "./style.css";
+import Result from "../components/Result";
+import History from "../components/History";
+
 
 const Board = () => {
   const [inputNumber, setinputNumber] = useState("");
@@ -15,7 +18,7 @@ const Board = () => {
 
   function handleAction(action) {
     if (actionToCalculate.current === null && inputNumber === '') {
-      setinputNumber('0');
+      setinputNumber(result);
     }
     if (actionToCalculate.current !== null){
       calculate();
@@ -88,14 +91,7 @@ const Board = () => {
     <div className="full-content">
       <div className="main-board">
         <div className="title-board">Calculator</div>
-        <div className="result-board">
-          <div>
-            {liveHistory}
-          </div>
-          <div>
-            {!inputNumber ? result : inputNumber}
-          </div>
-        </div>
+        <Result currentHistory={liveHistory} inputNumber={inputNumber} result={result} />
         <div className="calculating-board">
           <div className="action-button" onClick={handleClear}>C</div>
           <div className="action-button" onClick={() => {handleAction(':')}}>:</div>
@@ -118,15 +114,7 @@ const Board = () => {
           <div className="angka-button" onClick={() => {angka('.')}}>.</div>
         </div>
       </div>
-      <div className="history-board">
-        <div>History</div>
-        {listHistory.map((history, indexHistory) => {
-          return <div key={indexHistory} onClick={() => handleClickHistory(history)}>
-            <div>{history.inputPertama}{history.inputKalkulasi}{history.inputKedua}</div>
-            <div>{history.hasil}</div>
-          </div>          
-        })}
-      </div>
+      <History listHistory={listHistory} onClickHistory={handleClickHistory}/>
     </div>
     </>
   );
