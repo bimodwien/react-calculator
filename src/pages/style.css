@@ -57,6 +57,7 @@
     color: #A88F08;
     padding: 20px 0;
     text-align: center;
+    cursor: pointer;
 }
 
 .angka-button {
@@ -64,6 +65,7 @@
     color: whitesmoke;
     padding: 20px 0;
     text-align: center;
+    cursor: pointer;
 }
 
 .equal-button {
@@ -71,4 +73,5 @@
     grid-area: myArea;
     padding: 40px 0;
     text-align: center;
+    cursor: pointer;
 }
