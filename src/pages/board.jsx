@@ -44,17 +44,20 @@ const Board = () => {
   function calculate() {
     let calculateResult = 0;
     if (actionToCalculate.current === '+') {
-      calculateResult = Number(result) + Number(inputNumber)
-      setLiveHistory(`${result} + ${inputNumber}`)
+      calculateResult = Number(result) + Number(inputNumber);
+      setLiveHistory(`${result} + ${inputNumber}`);
     }
     if (actionToCalculate.current === '-') {
       calculateResult = result - inputNumber;
+      setLiveHistory(`${result} - ${inputNumber}`);
     }
     if (actionToCalculate.current === 'x') {
       calculateResult = result * inputNumber;
+      setLiveHistory(`${result} * ${inputNumber}`);
     }
     if (actionToCalculate.current === ':') {
       calculateResult = result / inputNumber;
+      setLiveHistory(`${result} : ${inputNumber}`);
     }
     setResult(calculateResult);
     setListHistory([...listHistory, {
