@@ -1,21 +1,29 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./style.css";
 import Result from "../components/Result";
 import History from "../components/History";
 import Action from "../components/Action";
 
+export const ContextAction = React.createContext({
+  setAngka : () => {},
+  onHandleDelete : () => {},
+});
+
+export const useAction = () => {
+  return useContext(ContextAction);
+};
 
 const Board = () => {
   const [inputNumber, setinputNumber] = useState("");
   const [result, setResult] = useState(0);
   const actionToCalculate = useRef(null);
 
-  const [listHistory, setListHistory] = useState([]);
   const [liveHistory, setLiveHistory] = useState('');
+  const [listHistory, setListHistory] = useState([]);
 
   function angka(angka) {
     setinputNumber(inputNumber + angka);
-  }
+  };
 
   function handleAction(action) {
     if (actionToCalculate.current === null && inputNumber === '') {
@@ -41,24 +49,25 @@ const Board = () => {
     return `${params} =`;
   }
 
+  function liveCurrentHistory() {
+    setLiveHistory(result + ' ' + actionToCalculate.current + ' ' + inputNumber);
+  }
+
   function calculate() {
     let calculateResult = 0;
     if (actionToCalculate.current === '+') {
       calculateResult = Number(result) + Number(inputNumber);
-      setLiveHistory(`${result} + ${inputNumber}`);
     }
     if (actionToCalculate.current === '-') {
       calculateResult = result - inputNumber;
-      setLiveHistory(`${result} - ${inputNumber}`);
     }
     if (actionToCalculate.current === 'x') {
       calculateResult = result * inputNumber;
-      setLiveHistory(`${result} * ${inputNumber}`);
     }
     if (actionToCalculate.current === ':') {
       calculateResult = result / inputNumber;
-      setLiveHistory(`${result} : ${inputNumber}`);
     }
+    liveCurrentHistory();
     setResult(calculateResult);
     setListHistory([...listHistory, {
       inputPertama: result,
@@ -100,13 +109,18 @@ const Board = () => {
           inputNumber={inputNumber} 
           result={result} 
         />
-        <Action 
-          handleClear={handleClear} 
-          handleDelete={handleDelete} 
-          handlePlusMinus={handlePlusMinus} 
-          handleAction={handleAction} 
-          angka={angka}
-        />
+        <ContextAction.Provider value={{
+          setAngka: angka,
+          onHandleDelete: handleDelete,
+        }}>
+          <Action 
+            handleClear={handleClear} 
+            // handleDelete={handleDelete} 
+            handlePlusMinus={handlePlusMinus} 
+            handleAction={handleAction} 
+            // angka={angka}
+          />
+        </ContextAction.Provider>
       </div>
       <History 
         listHistory={listHistory} 
