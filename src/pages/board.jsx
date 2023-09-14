@@ -7,6 +7,9 @@ import Action from "../components/Action";
 export const ContextAction = React.createContext({
   setAngka : () => {},
   onHandleDelete : () => {},
+  onHandleClear : () => {},
+  onHandleAction : () => {},
+  onHandlePlusMinus : () => {}
 });
 
 export const useAction = () => {
@@ -112,14 +115,11 @@ const Board = () => {
         <ContextAction.Provider value={{
           setAngka: angka,
           onHandleDelete: handleDelete,
+          onHandleClear: handleClear,
+          onHandlePlusMinus: handlePlusMinus,
+          onHandleAction: handleAction
         }}>
-          <Action 
-            handleClear={handleClear} 
-            // handleDelete={handleDelete} 
-            handlePlusMinus={handlePlusMinus} 
-            handleAction={handleAction} 
-            // angka={angka}
-          />
+          <Action />
         </ContextAction.Provider>
       </div>
       <History 

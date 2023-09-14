@@ -1,8 +1,13 @@
 import React from 'react'
 import { useAction } from '../pages/board'
 
-const Action = ({handleAction, handleClear, handlePlusMinus,}) => {
-  const {setAngka : angka, onHandleDelete: handleDelete} = useAction()
+const Action = () => {
+  const {setAngka : angka,
+    onHandleDelete: handleDelete, 
+    onHandleClear: handleClear, 
+    onHandlePlusMinus: handlePlusMinus, 
+    onHandleAction: handleAction
+  } = useAction()
   return (
     <>
         <div className="calculating-board">
